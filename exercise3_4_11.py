@@ -115,6 +115,72 @@ for i in range(len(finSeqs)):
 	seqCodonCounts.append((loci[i], tmpCCL))
 
 print("...DONE")
+'''
+NEW ADDITION: 4/18/17
+CUI CALCULATION
+'''
+
+pvalues = []
+qvalues = []
+CUIs = []
+
+codons = []
+for i in seqCodonCounts:
+	codons.append(i[1])
+
+# get L values
+Lvalues = []
+for i in range(len(finSeqs)):
+	Lvalues.append(len(finSeqs[i])/3)
+print(Lvalues[:10])
+
+# get q values
+for i in range(len(finSeqs)):
+	qTEMP = []
+	for j in range(len(codons[i])):
+		qTEMP.append(float(codons[i][j][1])/float(Lvalues[i]))
+
+	qvalues.append(qTEMP)
+
+print(qvalues[:5])
+
+# get tvalue
+Tvalue = float(len(data)/3)
+# print("tval: ", Tvalue)
+
+# new codon dict
+newCodonDict = {}
+for i in everyCodonOut:
+	if i in everyCodonOut:
+		newCodonDict[i] = 0
+for i in range(len(data)):
+	if (i+1)%3 == 0 and data[i:i+3] in codonCounts.keys():
+			newCodonDict[data[i:i+3]] +=1
+# print(newCodonDict)
+
+for key, value in newCodonDict.items():
+	pvalues.append((key, float(value)/Tvalue))
+
+
+# get final CUIs:
+for i in range(len(qvalues)):
+	CUIsOneSEQ = 0.0
+	for j in range(len(qvalues[i])):
+		CUIsOneSEQ += pvalues[j][1]*qvalues[i][j]
+
+	CUIs.append((loci[i], CUIsOneSEQ))
+
+print("CUIS")
+print(CUIs[:10])
+
+for entry in CUIs:
+	print entry[0] + '\t' + str(entry[1])
+
+
+'''
+NEW ADDITION ENDS
+'''
+
 
 
 # separate into labels and sequences
