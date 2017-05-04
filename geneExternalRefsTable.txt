@@ -1,0 +1,5 @@
+CREATE TABLE geneExternalRefs (
+gene_id INT (10) UNSIGNED NOT NULL,
+external_db VARCHAR (25) NOT NULL,
+extern_id INT (10) NOT NULL,
+KEY (gene_id) ) ENGINE=InnoDB;

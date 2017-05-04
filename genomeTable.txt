@@ -1,0 +1,10 @@
+CREATE TABLE genomes (
+genome_id INT (10) UNSIGNED NOT NULL AUTO_INCREMENT,
+tax_id INT (10) UNSIGNED NOT NULL,
+name_short VARCHAR (10),   
+name_long VARCHAR (100) NOT NULL, 
+size_bp INT (100) UNSIGNED NOT NULL,
+domain ENUM('bacteria', 'archaea', 'eukarya') DEFAULT 'bacteria',
+accession VARCHAR (100) NOT NULL, 
+release_date DATE, 
+PRIMARY KEY (genome_id) ) ENGINE=InnoDB;
