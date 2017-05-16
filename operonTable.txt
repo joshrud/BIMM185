@@ -1,0 +1,11 @@
+CREATE TABLE operons_sorted (
+
+name VARCHAR (10), 
+start INT (100) UNSIGNED,
+end INT (100) UNSIGNED,
+strand ENUM('forward','reverse'),
+num_genes INT (5) UNSIGNED,
+genes_contained VARCHAR (50),
+evidence VARCHAR (100),
+evidence_support VARCHAR (20)
+)Engine=InnoDB;
